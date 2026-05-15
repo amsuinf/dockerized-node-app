@@ -1,13 +1,13 @@
 # syntax=docker/dockerfile:1.6
 
 # ---------- Build stage ----------
-FROM node:20-alpine AS build
+FROM node:24.0.0-alpine AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev
 
 # ---------- Runtime stage ----------
-FROM node:20-alpine AS runtime
+FROM node:24.0.0-alpine AS runtime
 
 # Run as non-root for security
 RUN addgroup -g 1001 nodejs && adduser -S -u 1001 -G nodejs nodejs
